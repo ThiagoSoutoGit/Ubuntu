@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Object detection | Ubuntu Rules</title>
+    <meta name="generator" content="VuePress 1.5.0">
+    
+    <meta name="description" content="">
+    <link rel="preload" href="/Ubuntu/assets/css/0.styles.c7d67049.css" as="style"><link rel="preload" href="/Ubuntu/assets/js/app.91ea8220.js" as="script"><link rel="preload" href="/Ubuntu/assets/js/3.0dc4f8a0.js" as="script"><link rel="preload" href="/Ubuntu/assets/js/6.3ddce0c9.js" as="script"><link rel="prefetch" href="/Ubuntu/assets/js/2.0b4d2525.js"><link rel="prefetch" href="/Ubuntu/assets/js/4.74f43045.js"><link rel="prefetch" href="/Ubuntu/assets/js/5.37444db2.js"><link rel="prefetch" href="/Ubuntu/assets/js/7.0197afb2.js">
+    <link rel="stylesheet" href="/Ubuntu/assets/css/0.styles.c7d67049.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/Ubuntu/" class="home-link router-link-active"><!----> <span class="site-name">Ubuntu Rules</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/Ubuntu/Pages/Python/TensorFlow.html" class="nav-link">
+  TensorFlow
+</a></div><div class="nav-item"><a href="/Ubuntu/Pages/Python/Object-Counting.html" class="nav-link router-link-exact-active router-link-active">
+  Object Detection and Counting
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/Ubuntu/Pages/Python/TensorFlow.html" class="nav-link">
+  TensorFlow
+</a></div><div class="nav-item"><a href="/Ubuntu/Pages/Python/Object-Counting.html" class="nav-link router-link-exact-active router-link-active">
+  Object Detection and Counting
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Object detection</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Ubuntu/Pages/Python/Object-Counting.html#resources" class="sidebar-link">Resources</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Ubuntu/Pages/Python/Object-Counting.html#counting-objects-using-tensorflow-object-detection-api" class="sidebar-link">Counting objects using TensorFlow Object detection API</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Ubuntu/Pages/Python/Object-Counting.html#counting-objects-using-tensorflow-yolov4-tflite" class="sidebar-link">Counting objects using 'tensorflow-yolov4-tflite'</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="object-detection"><a href="#object-detection" aria-hidden="true" class="header-anchor">#</a> Object detection</h1> <h2 id="resources"><a href="#resources" aria-hidden="true" class="header-anchor">#</a> Resources</h2> <p><a href="https://github.com/hunglc007/tensorflow-yolov4-tflite" target="_blank" rel="noopener noreferrer">YOLOv4 and TensorFlow<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://www.youtube.com/watch?v=5HXcli9Ts9s" target="_blank" rel="noopener noreferrer">Object Detection with TensorFlow<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="counting-objects-using-tensorflow-object-detection-api"><a href="#counting-objects-using-tensorflow-object-detection-api" aria-hidden="true" class="header-anchor">#</a> Counting objects using TensorFlow Object detection API</h2> <div class="language-py line-numbers-mode"><pre class="language-py"><code>
+<span class="token comment"># Setup</span>
+
+<span class="token comment">#%% md</span>
+
+Important<span class="token punctuation">:</span> If yo<span class="token string">u're running on a local machine, be sure to follow the [installation instructions](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md). This notebook includes only what'</span>s necessary to run <span class="token keyword">in</span> Colab<span class="token punctuation">.</span>
+
+<span class="token comment">#%% md</span>
+
+<span class="token comment">### Install</span>
+
+<span class="token comment">#%%</span>
+
+!pip install <span class="token operator">-</span>U <span class="token operator">-</span><span class="token operator">-</span>pre tensorflow<span class="token operator">==</span><span class="token string">&quot;2.*&quot;</span>
+
+<span class="token comment">#%% md</span>
+
+Make sure you have `pycocotools` installed
+
+<span class="token comment">#%%</span>
+
+!pip install pycocotools
+
+<span class="token comment">#%% md</span>
+
+Get `tensorflow<span class="token operator">/</span>models` <span class="token keyword">or</span> `cd` to parent directory of the repository<span class="token punctuation">.</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> pathlib
+
+
+<span class="token keyword">if</span> <span class="token string">&quot;models&quot;</span> <span class="token keyword">in</span> pathlib<span class="token punctuation">.</span>Path<span class="token punctuation">.</span>cwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>parts<span class="token punctuation">:</span>
+  <span class="token keyword">while</span> <span class="token string">&quot;models&quot;</span> <span class="token keyword">in</span> pathlib<span class="token punctuation">.</span>Path<span class="token punctuation">.</span>cwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>parts<span class="token punctuation">:</span>
+    os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span><span class="token string">'..'</span><span class="token punctuation">)</span>
+<span class="token keyword">elif</span> <span class="token keyword">not</span> pathlib<span class="token punctuation">.</span>Path<span class="token punctuation">(</span><span class="token string">'models'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>exists<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  !git clone <span class="token operator">-</span><span class="token operator">-</span>depth <span class="token number">1</span> https<span class="token punctuation">:</span><span class="token operator">//</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>tensorflow<span class="token operator">/</span>models
+
+<span class="token comment">#%% md</span>
+
+Compile protobufs <span class="token keyword">and</span> install the object_detection package
+
+<span class="token comment">#%%</span>
+
+<span class="token operator">%</span><span class="token operator">%</span>bash
+cd models<span class="token operator">/</span>research<span class="token operator">/</span> 
+protoc object_detection<span class="token operator">/</span>protos<span class="token operator">/</span><span class="token operator">*</span><span class="token punctuation">.</span>proto <span class="token operator">-</span><span class="token operator">-</span>python_out<span class="token operator">=</span><span class="token punctuation">.</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token operator">%</span><span class="token operator">%</span>bash 
+cd models<span class="token operator">/</span>research
+pip install <span class="token punctuation">.</span>
+
+<span class="token comment">#%% md</span>
+
+<span class="token comment">### Imports</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> six<span class="token punctuation">.</span>moves<span class="token punctuation">.</span>urllib <span class="token keyword">as</span> urllib
+<span class="token keyword">import</span> sys
+<span class="token keyword">import</span> tarfile
+<span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf
+<span class="token keyword">import</span> zipfile
+
+
+<span class="token keyword">from</span> collections <span class="token keyword">import</span> defaultdict
+<span class="token keyword">from</span> io <span class="token keyword">import</span> StringIO
+<span class="token keyword">from</span> matplotlib <span class="token keyword">import</span> pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<span class="token keyword">from</span> IPython<span class="token punctuation">.</span>display <span class="token keyword">import</span> display
+
+<span class="token comment">#%% md</span>
+
+Import the <span class="token builtin">object</span> detection module<span class="token punctuation">.</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token keyword">from</span> object_detection<span class="token punctuation">.</span>utils <span class="token keyword">import</span> ops <span class="token keyword">as</span> utils_ops
+<span class="token keyword">from</span> object_detection<span class="token punctuation">.</span>utils <span class="token keyword">import</span> label_map_util
+<span class="token keyword">from</span> object_detection<span class="token punctuation">.</span>utils <span class="token keyword">import</span> visualization_utils <span class="token keyword">as</span> vis_util
+
+<span class="token comment">#%% md</span>
+
+Patches<span class="token punctuation">:</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token comment"># patch tf1 into `utils.ops`</span>
+utils_ops<span class="token punctuation">.</span>tf <span class="token operator">=</span> tf<span class="token punctuation">.</span>compat<span class="token punctuation">.</span>v1
+
+<span class="token comment"># Patch the location of gfile</span>
+tf<span class="token punctuation">.</span>gfile <span class="token operator">=</span> tf<span class="token punctuation">.</span>io<span class="token punctuation">.</span>gfile
+
+<span class="token comment">#%% md</span>
+
+<span class="token comment"># Model preparation </span>
+
+<span class="token comment">#%% md</span>
+
+<span class="token comment">## Variables</span>
+
+Any model exported using the `export_inference_graph<span class="token punctuation">.</span>py` tool can be loaded here simply by changing the path<span class="token punctuation">.</span>
+
+By default we use an <span class="token string">&quot;SSD with Mobilenet&quot;</span> model here<span class="token punctuation">.</span> See the <span class="token punctuation">[</span>detection model zoo<span class="token punctuation">]</span><span class="token punctuation">(</span>https<span class="token punctuation">:</span><span class="token operator">//</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>tensorflow<span class="token operator">/</span>models<span class="token operator">/</span>blob<span class="token operator">/</span>master<span class="token operator">/</span>research<span class="token operator">/</span>object_detection<span class="token operator">/</span>g3doc<span class="token operator">/</span>detection_model_zoo<span class="token punctuation">.</span>md<span class="token punctuation">)</span> <span class="token keyword">for</span> a <span class="token builtin">list</span> of other models that can be run out<span class="token operator">-</span>of<span class="token operator">-</span>the<span class="token operator">-</span>box <span class="token keyword">with</span> varying speeds <span class="token keyword">and</span> accuracies<span class="token punctuation">.</span>
+
+<span class="token comment">#%% md</span>
+
+<span class="token comment">## Loader</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token keyword">def</span> <span class="token function">load_model</span><span class="token punctuation">(</span>model_name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  base_url <span class="token operator">=</span> <span class="token string">'http://download.tensorflow.org/models/object_detection/'</span>
+  model_file <span class="token operator">=</span> model_name <span class="token operator">+</span> <span class="token string">'.tar.gz'</span>
+  model_dir <span class="token operator">=</span> tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>get_file<span class="token punctuation">(</span>
+    fname<span class="token operator">=</span>model_name<span class="token punctuation">,</span> 
+    origin<span class="token operator">=</span>base_url <span class="token operator">+</span> model_file<span class="token punctuation">,</span>
+    untar<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+  model_dir <span class="token operator">=</span> pathlib<span class="token punctuation">.</span>Path<span class="token punctuation">(</span>model_dir<span class="token punctuation">)</span><span class="token operator">/</span><span class="token string">&quot;saved_model&quot;</span>
+
+  model <span class="token operator">=</span> tf<span class="token punctuation">.</span>saved_model<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>model_dir<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  model <span class="token operator">=</span> model<span class="token punctuation">.</span>signatures<span class="token punctuation">[</span><span class="token string">'serving_default'</span><span class="token punctuation">]</span>
+
+  <span class="token keyword">return</span> model
+
+<span class="token comment">#%% md</span>
+
+<span class="token comment">## Loading label map</span>
+Label maps <span class="token builtin">map</span> indices to category names<span class="token punctuation">,</span> so that when our convolution network predicts `<span class="token number">5</span>`<span class="token punctuation">,</span> we know that this corresponds to `airplane`<span class="token punctuation">.</span>  Here we use internal utility functions<span class="token punctuation">,</span> but anything that returns a dictionary mapping integers to appropriate string labels would be fine
+
+<span class="token comment">#%%</span>
+
+<span class="token comment"># List of the strings that is used to add correct label for each box.</span>
+PATH_TO_LABELS <span class="token operator">=</span> <span class="token string">'models/research/object_detection/data/mscoco_label_map.pbtxt'</span>
+category_index <span class="token operator">=</span> label_map_util<span class="token punctuation">.</span>create_category_index_from_labelmap<span class="token punctuation">(</span>PATH_TO_LABELS<span class="token punctuation">,</span> use_display_name<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment">#%% md</span>
+
+For the sake of simplicity we will test on <span class="token number">2</span> images<span class="token punctuation">:</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token comment"># If you want to test the code with your images, just add path to the images to the TEST_IMAGE_PATHS.</span>
+PATH_TO_TEST_IMAGES_DIR <span class="token operator">=</span> pathlib<span class="token punctuation">.</span>Path<span class="token punctuation">(</span><span class="token string">'models/research/object_detection/test_images'</span><span class="token punctuation">)</span>
+TEST_IMAGE_PATHS <span class="token operator">=</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span>PATH_TO_TEST_IMAGES_DIR<span class="token punctuation">.</span>glob<span class="token punctuation">(</span><span class="token string">&quot;*.png&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+TEST_IMAGE_PATHS
+
+<span class="token comment">#%% md</span>
+
+<span class="token comment"># Detection</span>
+
+<span class="token comment">#%% md</span>
+
+Load an <span class="token builtin">object</span> detection model<span class="token punctuation">:</span>
+
+<span class="token comment">#%%</span>
+
+model_name <span class="token operator">=</span> <span class="token string">'ssd_mobilenet_v1_coco_2017_11_17'</span>
+detection_model <span class="token operator">=</span> load_model<span class="token punctuation">(</span>model_name<span class="token punctuation">)</span>
+
+<span class="token comment">#%% md</span>
+
+Check the model's <span class="token builtin">input</span> signature<span class="token punctuation">,</span> it expects a batch of <span class="token number">3</span><span class="token operator">-</span>color images of <span class="token builtin">type</span> uint8<span class="token punctuation">:</span> 
+
+<span class="token comment">#%%</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>detection_model<span class="token punctuation">.</span>inputs<span class="token punctuation">)</span>
+
+<span class="token comment">#%% md</span>
+
+And returns several outputs<span class="token punctuation">:</span>
+
+<span class="token comment">#%%</span>
+
+detection_model<span class="token punctuation">.</span>output_dtypes
+
+<span class="token comment">#%%</span>
+
+detection_model<span class="token punctuation">.</span>output_shapes
+
+<span class="token comment">#%% md</span>
+
+Add a wrapper function to call the model<span class="token punctuation">,</span> <span class="token keyword">and</span> cleanup the outputs<span class="token punctuation">:</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token keyword">def</span> <span class="token function">run_inference_for_single_image</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> image<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  image <span class="token operator">=</span> np<span class="token punctuation">.</span>asarray<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+  <span class="token comment"># The input needs to be a tensor, convert it using `tf.convert_to_tensor`.</span>
+  input_tensor <span class="token operator">=</span> tf<span class="token punctuation">.</span>convert_to_tensor<span class="token punctuation">(</span>image<span class="token punctuation">)</span>
+  <span class="token comment"># The model expects a batch of images, so add an axis with `tf.newaxis`.</span>
+  input_tensor <span class="token operator">=</span> input_tensor<span class="token punctuation">[</span>tf<span class="token punctuation">.</span>newaxis<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+
+  <span class="token comment"># Run inference</span>
+  output_dict <span class="token operator">=</span> model<span class="token punctuation">(</span>input_tensor<span class="token punctuation">)</span>
+
+  <span class="token comment"># All outputs are batches tensors.</span>
+  <span class="token comment"># Convert to numpy arrays, and take index [0] to remove the batch dimension.</span>
+  <span class="token comment"># We're only interested in the first num_detections.</span>
+  num_detections <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>output_dict<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token string">'num_detections'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  output_dict <span class="token operator">=</span> <span class="token punctuation">{</span>key<span class="token punctuation">:</span>value<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">:</span>num_detections<span class="token punctuation">]</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+                 <span class="token keyword">for</span> key<span class="token punctuation">,</span>value <span class="token keyword">in</span> output_dict<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+  output_dict<span class="token punctuation">[</span><span class="token string">'num_detections'</span><span class="token punctuation">]</span> <span class="token operator">=</span> num_detections
+
+  <span class="token comment"># detection_classes should be ints.</span>
+  output_dict<span class="token punctuation">[</span><span class="token string">'detection_classes'</span><span class="token punctuation">]</span> <span class="token operator">=</span> output_dict<span class="token punctuation">[</span><span class="token string">'detection_classes'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span>np<span class="token punctuation">.</span>int64<span class="token punctuation">)</span>
+   
+  <span class="token comment"># Handle models with masks:</span>
+  <span class="token keyword">if</span> <span class="token string">'detection_masks'</span> <span class="token keyword">in</span> output_dict<span class="token punctuation">:</span>
+    <span class="token comment"># Reframe the the bbox mask to the image size.</span>
+    detection_masks_reframed <span class="token operator">=</span> utils_ops<span class="token punctuation">.</span>reframe_box_masks_to_image_masks<span class="token punctuation">(</span>
+              output_dict<span class="token punctuation">[</span><span class="token string">'detection_masks'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> output_dict<span class="token punctuation">[</span><span class="token string">'detection_boxes'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+               image<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> image<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>      
+    detection_masks_reframed <span class="token operator">=</span> tf<span class="token punctuation">.</span>cast<span class="token punctuation">(</span>detection_masks_reframed <span class="token operator">&gt;</span> <span class="token number">0.5</span><span class="token punctuation">,</span>
+                                       tf<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+    output_dict<span class="token punctuation">[</span><span class="token string">'detection_masks_reframed'</span><span class="token punctuation">]</span> <span class="token operator">=</span> detection_masks_reframed<span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+  <span class="token keyword">return</span> output_dict
+
+<span class="token comment">#%% md</span>
+
+Run it on each test image <span class="token keyword">and</span> show the results<span class="token punctuation">:</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token keyword">def</span> <span class="token function">show_inference</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> image_path<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token comment"># the array based representation of the image will be used later in order to prepare the</span>
+  <span class="token comment"># result image with boxes and labels on it.</span>
+  image_np <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>image_path<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token comment"># Actual detection.</span>
+  output_dict <span class="token operator">=</span> run_inference_for_single_image<span class="token punctuation">(</span>model<span class="token punctuation">,</span> image_np<span class="token punctuation">)</span>
+  <span class="token comment"># Visualization of the results of a detection.</span>
+  vis_util<span class="token punctuation">.</span>visualize_boxes_and_labels_on_image_array<span class="token punctuation">(</span>
+      image_np<span class="token punctuation">,</span>
+      output_dict<span class="token punctuation">[</span><span class="token string">'detection_boxes'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      output_dict<span class="token punctuation">[</span><span class="token string">'detection_classes'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      output_dict<span class="token punctuation">[</span><span class="token string">'detection_scores'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      category_index<span class="token punctuation">,</span>
+      instance_masks<span class="token operator">=</span>output_dict<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'detection_masks_reframed'</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      use_normalized_coordinates<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+      line_thickness<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">)</span>
+
+  display<span class="token punctuation">(</span>Image<span class="token punctuation">.</span>fromarray<span class="token punctuation">(</span>image_np<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token keyword">for</span> image_path <span class="token keyword">in</span> TEST_IMAGE_PATHS<span class="token punctuation">:</span>
+  show_inference<span class="token punctuation">(</span>detection_model<span class="token punctuation">,</span> image_path<span class="token punctuation">)</span>
+
+
+<span class="token comment">#%% md</span>
+
+<span class="token comment">## Instance Segmentation</span>
+
+<span class="token comment">#%%</span>
+
+model_name <span class="token operator">=</span> <span class="token string">&quot;mask_rcnn_inception_resnet_v2_atrous_coco_2018_01_28&quot;</span>
+masking_model <span class="token operator">=</span> load_model<span class="token punctuation">(</span>model_name<span class="token punctuation">)</span>
+
+<span class="token comment">#%% md</span>
+
+The instance segmentation model includes a `detection_masks` output<span class="token punctuation">:</span>
+
+<span class="token comment">#%%</span>
+
+masking_model<span class="token punctuation">.</span>output_shapes
+
+<span class="token comment">#%%</span>
+
+<span class="token keyword">for</span> image_path <span class="token keyword">in</span> TEST_IMAGE_PATHS<span class="token punctuation">:</span>
+  show_inference<span class="token punctuation">(</span>masking_model<span class="token punctuation">,</span> image_path<span class="token punctuation">)</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br><span class="line-number">160</span><br><span class="line-number">161</span><br><span class="line-number">162</span><br><span class="line-number">163</span><br><span class="line-number">164</span><br><span class="line-number">165</span><br><span class="line-number">166</span><br><span class="line-number">167</span><br><span class="line-number">168</span><br><span class="line-number">169</span><br><span class="line-number">170</span><br><span class="line-number">171</span><br><span class="line-number">172</span><br><span class="line-number">173</span><br><span class="line-number">174</span><br><span class="line-number">175</span><br><span class="line-number">176</span><br><span class="line-number">177</span><br><span class="line-number">178</span><br><span class="line-number">179</span><br><span class="line-number">180</span><br><span class="line-number">181</span><br><span class="line-number">182</span><br><span class="line-number">183</span><br><span class="line-number">184</span><br><span class="line-number">185</span><br><span class="line-number">186</span><br><span class="line-number">187</span><br><span class="line-number">188</span><br><span class="line-number">189</span><br><span class="line-number">190</span><br><span class="line-number">191</span><br><span class="line-number">192</span><br><span class="line-number">193</span><br><span class="line-number">194</span><br><span class="line-number">195</span><br><span class="line-number">196</span><br><span class="line-number">197</span><br><span class="line-number">198</span><br><span class="line-number">199</span><br><span class="line-number">200</span><br><span class="line-number">201</span><br><span class="line-number">202</span><br><span class="line-number">203</span><br><span class="line-number">204</span><br><span class="line-number">205</span><br><span class="line-number">206</span><br><span class="line-number">207</span><br><span class="line-number">208</span><br><span class="line-number">209</span><br><span class="line-number">210</span><br><span class="line-number">211</span><br><span class="line-number">212</span><br><span class="line-number">213</span><br><span class="line-number">214</span><br><span class="line-number">215</span><br><span class="line-number">216</span><br><span class="line-number">217</span><br><span class="line-number">218</span><br><span class="line-number">219</span><br><span class="line-number">220</span><br><span class="line-number">221</span><br><span class="line-number">222</span><br><span class="line-number">223</span><br><span class="line-number">224</span><br><span class="line-number">225</span><br><span class="line-number">226</span><br><span class="line-number">227</span><br><span class="line-number">228</span><br><span class="line-number">229</span><br><span class="line-number">230</span><br><span class="line-number">231</span><br><span class="line-number">232</span><br><span class="line-number">233</span><br><span class="line-number">234</span><br><span class="line-number">235</span><br><span class="line-number">236</span><br><span class="line-number">237</span><br><span class="line-number">238</span><br><span class="line-number">239</span><br><span class="line-number">240</span><br><span class="line-number">241</span><br><span class="line-number">242</span><br><span class="line-number">243</span><br><span class="line-number">244</span><br><span class="line-number">245</span><br><span class="line-number">246</span><br><span class="line-number">247</span><br><span class="line-number">248</span><br><span class="line-number">249</span><br><span class="line-number">250</span><br><span class="line-number">251</span><br><span class="line-number">252</span><br><span class="line-number">253</span><br><span class="line-number">254</span><br><span class="line-number">255</span><br><span class="line-number">256</span><br><span class="line-number">257</span><br><span class="line-number">258</span><br><span class="line-number">259</span><br><span class="line-number">260</span><br><span class="line-number">261</span><br><span class="line-number">262</span><br><span class="line-number">263</span><br><span class="line-number">264</span><br><span class="line-number">265</span><br><span class="line-number">266</span><br><span class="line-number">267</span><br><span class="line-number">268</span><br><span class="line-number">269</span><br><span class="line-number">270</span><br><span class="line-number">271</span><br><span class="line-number">272</span><br><span class="line-number">273</span><br><span class="line-number">274</span><br><span class="line-number">275</span><br><span class="line-number">276</span><br><span class="line-number">277</span><br><span class="line-number">278</span><br></div></div><h2 id="counting-objects-using-tensorflow-yolov4-tflite"><a href="#counting-objects-using-tensorflow-yolov4-tflite" aria-hidden="true" class="header-anchor">#</a> Counting objects using 'tensorflow-yolov4-tflite'</h2> <p>Change the util.py, function draw_bbox :</p> <div class="language-py line-numbers-mode"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlighted"> </div><br><br></div><pre class="language-py"><code><span class="token keyword">def</span> <span class="token function">draw_bbox</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> bboxes<span class="token punctuation">,</span> classes<span class="token operator">=</span>read_class_names<span class="token punctuation">(</span>cfg<span class="token punctuation">.</span>YOLO<span class="token punctuation">.</span>CLASSES<span class="token punctuation">)</span><span class="token punctuation">,</span> show_label<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    bboxes: [x_min, y_min, x_max, y_max, probability, cls_id] format coordinates.
+    &quot;&quot;&quot;</span>
+
+    num_classes <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>classes<span class="token punctuation">)</span>
+    image_h<span class="token punctuation">,</span> image_w<span class="token punctuation">,</span> _ <span class="token operator">=</span> image<span class="token punctuation">.</span>shape
+    hsv_tuples <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">*</span> x <span class="token operator">/</span> num_classes<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_classes<span class="token punctuation">)</span><span class="token punctuation">]</span>
+    colors <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> colorsys<span class="token punctuation">.</span>hsv_to_rgb<span class="token punctuation">(</span><span class="token operator">*</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> hsv_tuples<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    colors <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> colors<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+    random<span class="token punctuation">.</span>shuffle<span class="token punctuation">(</span>colors<span class="token punctuation">)</span>
+    random<span class="token punctuation">.</span>seed<span class="token punctuation">(</span><span class="token boolean">None</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> i<span class="token punctuation">,</span> bbox <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>bboxes<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        coor <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>bbox<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span>int32<span class="token punctuation">)</span>
+        fontScale <span class="token operator">=</span> <span class="token number">0.5</span>
+        score <span class="token operator">=</span> bbox<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span>
+        class_ind <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>bbox<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        bbox_color <span class="token operator">=</span> colors<span class="token punctuation">[</span>class_ind<span class="token punctuation">]</span>
+        bbox_thick <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token number">0.6</span> <span class="token operator">*</span> <span class="token punctuation">(</span>image_h <span class="token operator">+</span> image_w<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">600</span><span class="token punctuation">)</span>
+        c1<span class="token punctuation">,</span> c2 <span class="token operator">=</span> <span class="token punctuation">(</span>coor<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> coor<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>coor<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> coor<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        cv2<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span>image<span class="token punctuation">,</span> c1<span class="token punctuation">,</span> c2<span class="token punctuation">,</span> bbox_color<span class="token punctuation">,</span> bbox_thick<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> show_label<span class="token punctuation">:</span>
+            bbox_mess <span class="token operator">=</span> <span class="token string">'%s: %.2f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>classes<span class="token punctuation">[</span>class_ind<span class="token punctuation">]</span><span class="token punctuation">,</span> score<span class="token punctuation">)</span>
+            t_size <span class="token operator">=</span> cv2<span class="token punctuation">.</span>getTextSize<span class="token punctuation">(</span>bbox_mess<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> fontScale<span class="token punctuation">,</span> thickness<span class="token operator">=</span>bbox_thick<span class="token operator">//</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+            cv2<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span>image<span class="token punctuation">,</span> c1<span class="token punctuation">,</span> <span class="token punctuation">(</span>c1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> t_size<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> c1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> t_size<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> bbox_color<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment"># filled</span>
+
+            cv2<span class="token punctuation">.</span>putText<span class="token punctuation">(</span>image<span class="token punctuation">,</span> bbox_mess<span class="token punctuation">,</span> <span class="token punctuation">(</span>c1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> c1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>FONT_HERSHEY_SIMPLEX<span class="token punctuation">,</span>
+                        fontScale<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> bbox_thick<span class="token operator">//</span><span class="token number">2</span><span class="token punctuation">,</span> lineType<span class="token operator">=</span>cv2<span class="token punctuation">.</span>LINE_AA<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'There are </span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">len</span><span class="token punctuation">(</span>bboxes<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string"> apples in this image'</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> image
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/Ubuntu/assets/js/app.91ea8220.js" defer></script><script src="/Ubuntu/assets/js/3.0dc4f8a0.js" defer></script><script src="/Ubuntu/assets/js/6.3ddce0c9.js" defer></script>
+  </body>
+</html>

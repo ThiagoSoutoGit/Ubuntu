@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "docs:devo": "vuepress dev docs --open --host localhost NODE_OPTIONS='--max-old-space-size=16384'"
+  }
+}

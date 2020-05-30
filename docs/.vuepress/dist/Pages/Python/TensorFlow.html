@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TensorFlow | Ubuntu Rules</title>
+    <meta name="generator" content="VuePress 1.5.0">
+    
+    <meta name="description" content="">
+    <link rel="preload" href="/Ubuntu/assets/css/0.styles.c7d67049.css" as="style"><link rel="preload" href="/Ubuntu/assets/js/app.91ea8220.js" as="script"><link rel="preload" href="/Ubuntu/assets/js/3.0dc4f8a0.js" as="script"><link rel="preload" href="/Ubuntu/assets/js/2.0b4d2525.js" as="script"><link rel="prefetch" href="/Ubuntu/assets/js/4.74f43045.js"><link rel="prefetch" href="/Ubuntu/assets/js/5.37444db2.js"><link rel="prefetch" href="/Ubuntu/assets/js/6.3ddce0c9.js"><link rel="prefetch" href="/Ubuntu/assets/js/7.0197afb2.js">
+    <link rel="stylesheet" href="/Ubuntu/assets/css/0.styles.c7d67049.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/Ubuntu/" class="home-link router-link-active"><!----> <span class="site-name">Ubuntu Rules</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/Ubuntu/Pages/Python/TensorFlow.html" class="nav-link router-link-exact-active router-link-active">
+  TensorFlow
+</a></div><div class="nav-item"><a href="/Ubuntu/Pages/Python/Object-Counting.html" class="nav-link">
+  Object Detection and Counting
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/Ubuntu/Pages/Python/TensorFlow.html" class="nav-link router-link-exact-active router-link-active">
+  TensorFlow
+</a></div><div class="nav-item"><a href="/Ubuntu/Pages/Python/Object-Counting.html" class="nav-link">
+  Object Detection and Counting
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>TensorFlow</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Ubuntu/Pages/Python/TensorFlow.html#simple-linear-regression" class="sidebar-link">Simple Linear Regression.</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Ubuntu/Pages/Python/TensorFlow.html#minimal-example" class="sidebar-link">Minimal Example</a></li></ul></li><li><a href="/Ubuntu/Pages/Python/TensorFlow.html#solving-the-simple-example-using-tensorflow" class="sidebar-link">Solving the simple example using TensorFlow</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Ubuntu/Pages/Python/TensorFlow.html#making-the-model-closer-to-the-numpy-example" class="sidebar-link">Making the model closer to the Numpy example</a></li></ul></li><li><a href="/Ubuntu/Pages/Python/TensorFlow.html#going-deeper-introduction-to-deep-neural-networks" class="sidebar-link">Going deeper Introduction to deep neural networks</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Ubuntu/Pages/Python/TensorFlow.html#softmax-function" class="sidebar-link">softmax function</a></li><li class="sidebar-sub-header"><a href="/Ubuntu/Pages/Python/TensorFlow.html#backpropagation" class="sidebar-link">Backpropagation</a></li></ul></li><li><a href="/Ubuntu/Pages/Python/TensorFlow.html#overfitting" class="sidebar-link">Overfitting</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Ubuntu/Pages/Python/TensorFlow.html#summary" class="sidebar-link">Summary</a></li></ul></li><li><a href="/Ubuntu/Pages/Python/TensorFlow.html#training-and-validation" class="sidebar-link">Training and validation</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="tensorflow"><a href="#tensorflow" aria-hidden="true" class="header-anchor">#</a> TensorFlow</h1> <h2 id="simple-linear-regression"><a href="#simple-linear-regression" aria-hidden="true" class="header-anchor">#</a> Simple Linear Regression.</h2> <h3 id="minimal-example"><a href="#minimal-example" aria-hidden="true" class="header-anchor">#</a> Minimal Example</h3> <ol><li>Import the relevant libraries</li></ol> <div class="language-py line-numbers-mode"><pre class="language-py"><code><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">from</span> mpl_toolkits<span class="token punctuation">.</span>mplot3d <span class="token keyword">import</span> Axes3D
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ol start="2"><li>Generate random input data to train on</li></ol> <div class="language-py line-numbers-mode"><pre class="language-py"><code>observations <span class="token operator">=</span> <span class="token number">1000</span>
+xs <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span>low<span class="token operator">=</span><span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> high<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span>observations<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+zs <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token punctuation">(</span>observations<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+inputs <span class="token operator">=</span> np<span class="token punctuation">.</span>column_stack<span class="token punctuation">(</span><span class="token punctuation">(</span>xs<span class="token punctuation">,</span> zs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>inputs<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>inputs<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Output is a matrix of size (1000,2)</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>(1000, 2)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>[[ 7.44651066  3.0441044 ]
+ [ 3.18741031 -6.10663328]
+ [ 7.47234553  6.86829353]
+ ...
+ [ 4.3408767   2.59859389]
+ [ 5.96692549 -1.95235124]
+ [ 6.43664934 -8.52279315]]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><table><thead><tr><th style="text-align:center;">Elements of the model in supervised learning</th> <th style="text-align:center;">Status</th></tr></thead> <tbody><tr><td style="text-align:center;">inputs</td> <td style="text-align:center;">done</td></tr> <tr><td style="text-align:center;">weights</td> <td style="text-align:center;">Computer</td></tr> <tr><td style="text-align:center;">biases</td> <td style="text-align:center;">Computer</td></tr> <tr><td style="text-align:center;">outputs</td> <td style="text-align:center;">Computer</td></tr> <tr><td style="text-align:center;">targets</td> <td style="text-align:center;">to do</td></tr></tbody></table> <p>Targets = $f(x,z) = 2x - 3z + 5 + noise$</p> <p>Where 2 is the first weight$(W_1)$ 3 is the second weight$(W_2)$ and 5$(b)$ is the baias.</p> <p>The noise is introduced to randomize the data.</p> <ol start="3"><li>Create the targets we will aim at</li></ol> <div class="language-py line-numbers-mode"><pre class="language-py"><code>noise <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>observations<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+targets <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>xs <span class="token operator">-</span> <span class="token number">3</span><span class="token operator">*</span>zs <span class="token operator">+</span> <span class="token number">5</span> <span class="token operator">+</span> noise
+
+<span class="token comment"># the targets are a linear combination of two vectors 1000x1 </span>
+<span class="token comment"># a scalar and noise 1000x1, their shape should be 1000x1</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>targets<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>Output the shape of the targets, a matrix 1000x1</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>(1000, 1)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ol start="4"><li>Plot the training data</li></ol> <div class="language-py line-numbers-mode"><pre class="language-py"><code><span class="token comment"># In order to use the 3D plot, the objects should have a certain shape, so we reshape the targets.</span>
+<span class="token comment"># The proper method to use is reshape and takes as arguments the dimensions in which we want to fit the object.</span>
+targets <span class="token operator">=</span> targets<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>observations<span class="token punctuation">,</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Plotting according to the conventional matplotlib.pyplot syntax</span>
+
+<span class="token comment"># Declare the figure</span>
+fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># A method allowing us to create the 3D plot</span>
+ax <span class="token operator">=</span> fig<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">,</span> projection<span class="token operator">=</span><span class="token string">'3d'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Choose the axes.</span>
+ax<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>xs<span class="token punctuation">,</span> zs<span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+
+<span class="token comment"># Set labels</span>
+ax<span class="token punctuation">.</span>set_xlabel<span class="token punctuation">(</span><span class="token string">'xs'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_ylabel<span class="token punctuation">(</span><span class="token string">'zs'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_zlabel<span class="token punctuation">(</span><span class="token string">'Targets'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># You can fiddle with the azim parameter to plot the data from different angles. Just change the value of azim=100</span>
+<span class="token comment"># to azim = 0 ; azim = 200, or whatever. Check and see what happens.</span>
+ax<span class="token punctuation">.</span>view_init<span class="token punctuation">(</span>azim<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span>
+
+<span class="token comment"># So far we were just describing the plot. This method actually shows the plot. </span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># We reshape the targets back to the shape that they were in before plotting.</span>
+<span class="token comment"># This reshaping is a side-effect of the 3D plot. Sorry for that.</span>
+targets <span class="token operator">=</span> targets<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>observations<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><p>Clean code</p> <div class="language-py line-numbers-mode"><pre class="language-py"><code>targets <span class="token operator">=</span> targets<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>observations<span class="token punctuation">,</span><span class="token punctuation">)</span>
+fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ax <span class="token operator">=</span> fig<span class="token punctuation">.</span>add_subplot<span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">,</span> projection<span class="token operator">=</span><span class="token string">'3d'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>xs<span class="token punctuation">,</span> zs<span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_xlabel<span class="token punctuation">(</span><span class="token string">'xs'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_ylabel<span class="token punctuation">(</span><span class="token string">'zs'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>set_zlabel<span class="token punctuation">(</span><span class="token string">'Targets'</span><span class="token punctuation">)</span>
+ax<span class="token punctuation">.</span>view_init<span class="token punctuation">(</span>azim<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+targets <span class="token operator">=</span> targets<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>observations<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/TrainingData-Example_1.167f9cbf.svg" alt="Training Data - Example 1"></div> <br> <ol start="5"><li>Create weights</li></ol> <div class="language-py line-numbers-mode"><pre class="language-py"><code><span class="token comment"># our initial weights and biases will be picked randomly from</span>
+<span class="token comment"># the interval minus 0.1 to 0.1.</span>
+init_range <span class="token operator">=</span> <span class="token number">0.1</span>
+<span class="token comment">#The size of the weights matrix is two by one as we</span>
+<span class="token comment"># have two variables so there are two weights one for#</span>
+<span class="token comment">#each input variable and a single output.</span>
+weights <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span><span class="token operator">-</span>init_range<span class="token punctuation">,</span> init_range<span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Weights: </span><span class="token interpolation"><span class="token punctuation">{</span>weights<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><ol start="6"><li>Create Biases</li></ol> <div class="language-py line-numbers-mode"><pre class="language-py"><code><span class="token comment">#Let's declare the bias and illogically the appropriate shape is one by one.</span>
+<span class="token comment">#So the bias is a scalar in machine learning.</span>
+<span class="token comment">#There are many biases as there are outputs.</span>
+<span class="token comment">#Each bias refers to an output.</span>
+biases <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span><span class="token operator">-</span>init_range<span class="token punctuation">,</span> init_range<span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Biases: </span><span class="token interpolation"><span class="token punctuation">{</span>biases<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>Weights: [[-0.07021836]
+ [ 0.00626743]]
+Biases: [-0.01464248]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ol start="7"><li>Set a learning rate</li></ol> <div class="language-py line-numbers-mode"><pre class="language-py"><code>learning_rate <span class="token operator">=</span> <span class="token number">0.02</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>So we are all set.
+We have inputs targets and arbitrary numbers for weights and biases.
+What is left is to vary the weights and biases so our outputs are closest to the targets as we know by now.
+The problem boils down to minimizing the loss function with respect to the weights and the biases.
+And because this is a regression we'll use one half the L2 norm loss function.</p> <br> <p>Next let's make our model learn.</p> <br> <p>Since this is an iterative problem.
+We must create a loop which will apply our update rule and calculate the last function.</p> <p>I'll use a for loop with 100 iterations to complete this task.
+Let's see the game plan will follow:</p> <ul><li><p>At each iteration We will calculate the outputs</p></li> <li><p>and compare them to the targets through the last function.</p></li> <li><p>We will print the last for each iteration so we know how the algorithm is doing.</p></li> <li><p>Finally we will adjust the weights and biases to get a better fit of the data.</p></li> <li><p>At the next iteration these updated weights and biases will provide different outputs.</p></li> <li><p>Then the procedure will be repeated.</p></li></ul> <p>Now the dot product of the input times the weights is 1000 by two times to buy one.
+So a 1000 by 1 matrix when we add the bias which is a scalar.
+Python adds the element wise.
+This means it is added to each element of the output matrix.</p> <div class="language-py line-numbers-mode"><pre class="language-py"><code><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    outputs <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>inputs<span class="token punctuation">,</span> weights<span class="token punctuation">)</span> <span class="token operator">+</span> biases
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>OK for simplicity let's declare a variable called deltas which will record the difference between the
+outputs and the targets.
+We already introduce such variable in the gradient descent lecture deltas equals outputs minus targets.
+That's useful as it is a part of the update rule.
+Then we must calculate the loss.</p> <div class="language-py line-numbers-mode"><pre class="language-py"><code>deltas <span class="token operator">=</span> outputs <span class="token operator">-</span> targets
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><br> <p>L2-norm loss formula:</p> <p>$\sum _i(y_i - t_i)^2$</p> <p>We said we will use half the L2 norm loss.
+Python actually speaking deltas is a 1000 by one array.
+We are interested in the sum of its terms squared.
+Following the formula for the L2 norm loss there is a num PI method called sum which will allow us to
+sum all the values in the array the L2 norm requires these values to be squared.
+So the code looks like this.
+And P does some of Delta squared.
+We then divide the whole expression by two to get the elegant update rules from the gradient descent.
+Let's further augment the loss by dividing it by the number of observations we have.
+This would give us the average loss per observation or the mean loss.
+Similarily to the division by 2.
+This does not change the logic of the last function.
+It is still lower than some more accurate results that will be obtained.
+This little improvement makes the learning independent of the number of observations instead of adjusting
+the learning rate.
+We adjust the loss that that's valuable as the same learning rate should give us similar results for
+both 1000 and 1 million observations.</p> <div class="language-py line-numbers-mode"><pre class="language-py"><code>loss <span class="token operator">=</span> np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>deltas <span class="token operator">**</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">/</span> observations
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>We'll print the last we've obtained each step.
+That's done as we want to keep an eye on whether it is decreasing as iterations are performed.
+If it is decreasing our machine learning algorithm functions well.</p> <div class="language-py line-numbers-mode"><pre class="language-py"><code><span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>Finally we must update the weights and biases so they are ready for the next iteration using the same
+rescaling trick.
+I'll also reskill the deltas.
+This is yet another way to make the algorithm more universal.
+So the new variable is deltas underscored skilled and equals deltas divided by observations.</p> <div class="language-py line-numbers-mode"><pre class="language-py"><code>deltas_scaled <span class="token operator">=</span> deltas <span class="token operator">/</span> observations
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>Let's update the weights.
+We will follow the gradient descent logic.</p> <p>$w_{i+1} = w_i - \eta \sum _i x_i \delta_i$</p> <p>The new weights are equal to the old weights minus the learning rate times the dot product of the inputs
+and the Deltas underscored scaled.
+The shape of the weights is two by one the shape of the inputs is one thousand by two and that of the
+Delta skilled is one thousand by one.
+Obviously we cannot simply multiply the inputs and the deltas.
+This is an issue that may arise occasionally due to the linear algebra involved to fix it.
+We must transpose the inputs matrix using the object but the method.
+Now the major C's are compatible.
+By 1000 times 1000 by one is equal to 2 by 1.</p> <div class="language-py line-numbers-mode"><pre class="language-py"><code>weights <span class="token operator">=</span> weights <span class="token operator">-</span> learning_rate <span class="token operator">*</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>inputs<span class="token punctuation">.</span>T<span class="token punctuation">,</span> deltas_scaled<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>Often when dealing with matrices you find the correct way to code it through dimensionality checks and
+compatability errors.</p> <p>However transposing major C's doesn't affect the information they hold so we can do it freely.</p></div> <p>All right let's update the biases.
+The new biases are equal to the old biases minus the learning rate times the sum of the deltas as explained
+in the gradient descent lecture.</p> <div class="language-py line-numbers-mode"><pre class="language-py"><code>biases <span class="token operator">=</span> biases <span class="token operator">-</span> learning_rate <span class="token operator">*</span> np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>deltas_scaled<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>This is the entire algorithm.
+Let's recap what it does:</p> <ol><li>first it calculates the outputs forgiven weights and biases.</li> <li>Second it calculates a loss function that compares the outputs to the targets.</li> <li>Third it prints the loss. So we can later analyze it and</li> <li>forth, We update the weights and the bias is following the gradient descent methodology.</li></ol> <p>Let's run the code.
+What we get is a list of numbers that appears to be in descending order right.
+These are the values of our average last function.
+It started from a high value and at each iteration it became lower and lower until it reached a point
+where it almost stopped changing.
+This means we have minimized or almost minimize the loss function with respect to the weights and biases.
+Therefore we have found a linear function that fits the model Well</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>113.1346113499832
+108.21425084240616
+103.88888353315217
+99.7849517016046
+95.84949440054764
+92.0702726846745
+88.4404105995388
+84.95392016265656
+81.60512775430881
+78.38859366840362
+75.29909427907384
+72.33161242080419
+69.4813290972211
+66.74361563721006
+64.11402617596718
+61.58829043492039
+59.162306787044116
+56.83213559608488
+54.59399281885322
+52.444243860188884
+50.3793976706198
+48.39610107712963
+46.491133337827655
+44.66140091167794
+42.90393243479416
+41.21587389514219
+39.594483997814095
+38.03712971334737
+36.54128200186008
+35.104511706058084
+33.72448560644502
+32.39896263232881
+31.125790222471856
+29.902900829474543
+28.728308562215652
+27.600105960897142
+26.516460899456188
+25.475613610314117
+24.475873826630895
+23.515618037423987
+22.593286851094458
+21.707382463078588
+20.856466223512808
+20.03915630096189
+19.25412543841651
+18.500098797916074
+17.77585189029656
+17.080208586701485
+16.41203920862674
+15.77025869339785
+15.153824832100188
+14.561736577101016
+13.993032416414623
+13.446788812270727
+12.922118701350518
+12.418170054254773
+11.934124491864695
+11.469195956348635
+11.022629434656377
+10.59369973242813
+10.181710296327049
+9.785992082882911
+9.40590247200998
+9.040824223434672
+8.690164474338356
+8.353353776587563
+8.029845171988013
+7.719113304060869
+7.42065356489872
+7.133981275715881
+6.858630899762206
+6.594155286322381
+6.34012494457287
+6.096127346117317
+5.861766255067884
+5.636661084584468
+5.420446278826976
+5.212770719316917
+5.013297154744328
+4.8217016532940695
+4.637673076602049
+4.460912574487216
+4.291133099638719
+4.128058941470141
+3.9714252783838333
+3.8209777477182216
+3.676472032679767
+3.537673465588702
+3.4043566467943345
+3.276305078640973
+3.153310813890127
+3.0351741180280087
+2.921703144909945
+2.812713625215003
+2.7080285672048383
+2.607477969300881
+2.5108985440130636
+2.4181334527717953
+2.3290320512325318
+2.2434496446393806
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br></div></div><p>The weights and the biases are optimize.
+But so are the outputs.
+Since the optimization process has ended.
+We can check these values here.
+We observe the values from the last iteration of the for loop.
+The one that gave us the lowest last function in the memory of the computer the weights biases and outputs
+variables are optimized as of now.
+Congratulations you learn how to create your first machine learning algorithm.</p> <br> <p>Still let's spend an extra minute on that.
+I'd like to print the weights and the bias's the weights seem about right.
+The bias is close to five as we wanted but not really.
+That's because we use too few iterations or an inappropriate learning rate.
+Let's rerun the code for the loop.
+This will continue optimizing the algorithm for another hundred iterations.
+We can see the bias improves when we increase the number of iterations.
+We strongly encourage you to play around with the code and find the optimal number of iterations for
+the problem.
+Try different values for observations learning rate number of iterations maybe even initial range for
+initializing the weights and biases cool.</p> <div class="language-py line-numbers-mode"><pre class="language-py"><code><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Weights: </span><span class="token interpolation"><span class="token punctuation">{</span>weights<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Biases: </span><span class="token interpolation"><span class="token punctuation">{</span>biases<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>Targets = $f(x,z) = 2x - 3z + 5 + noise$</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>Weights: [[ 1.9962384 ]
+ [-3.00212515]]
+Biases: [5.28171043]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>Weights: [[ 1.99842328]
+ [-3.00330109]]
+Biases: [5.01471378]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>Finally I'd like to show you the plot of the output at the last iteration against the targets.
+The closer this plot is to a 45 degree line the closer the outputs are to the targets.
+Obviously our model worked like a charm.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/LastOutputvsImputs-Example_1.cecc4123.svg" alt="Training Data - Example 1"></div> <br> <h2 id="solving-the-simple-example-using-tensorflow"><a href="#solving-the-simple-example-using-tensorflow" aria-hidden="true" class="header-anchor">#</a> Solving the simple example using TensorFlow</h2> <div class="language-py line-numbers-mode"><pre class="language-py"><code><span class="token comment">#%%</span>
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf
+
+<span class="token comment">#%%</span>
+<span class="token comment"># 2. Data generation</span>
+
+observations <span class="token operator">=</span> <span class="token number">1000</span>
+xs <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span>low<span class="token operator">=</span><span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> high<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span>observations<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+zs <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>observations<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+generated_inputs <span class="token operator">=</span> np<span class="token punctuation">.</span>column_stack<span class="token punctuation">(</span><span class="token punctuation">(</span>xs<span class="token punctuation">,</span> zs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+noise <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>observations<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+generated_targets <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>xs <span class="token operator">-</span> <span class="token number">3</span><span class="token operator">*</span>zs <span class="token operator">+</span> <span class="token number">5</span> <span class="token operator">+</span> noise
+
+np<span class="token punctuation">.</span>savez<span class="token punctuation">(</span><span class="token string">'TF_intro'</span><span class="token punctuation">,</span> inputs<span class="token operator">=</span>generated_inputs<span class="token punctuation">,</span> targets<span class="token operator">=</span>generated_targets<span class="token punctuation">)</span>
+<span class="token comment">#%%</span>
+<span class="token comment"># 3. Solving with TensorFlow</span>
+
+training_data <span class="token operator">=</span> np<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">'TF_intro.npz'</span><span class="token punctuation">)</span>
+
+input_size <span class="token operator">=</span> <span class="token number">2</span>
+output_size <span class="token operator">=</span> <span class="token number">1</span>
+
+<span class="token comment"># tf.keras.Sequential() function that specifies how the model</span>
+<span class="token comment"># will be laid down ('stack layers')</span>
+<span class="token comment"># Linear combination + Output = Layer*</span>
+
+<span class="token comment"># The tf.keras.layers.Dense(output size)</span>
+<span class="token comment"># takes the inputs provided to the model</span>
+<span class="token comment"># and calculates the dot product of the inputs and weights and adds the bias</span>
+<span class="token comment"># It would be the output = np.dot(inputs, weights) + bias</span>
+
+model <span class="token operator">=</span> tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>Dense<span class="token punctuation">(</span>output_size<span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># model.compile(optimizer, loss) configures the model for training</span>
+<span class="token comment"># https://www.tensorflow.org/api_docs/python/tf/keras/optimizers</span>
+<span class="token comment"># L2-norm loss = Least sum of squares (least sum of squared error)</span>
+<span class="token comment"># scaling by #observations = average (mean)</span>
+
+model<span class="token punctuation">.</span><span class="token builtin">compile</span><span class="token punctuation">(</span>optimizer<span class="token operator">=</span><span class="token string">'sgd'</span><span class="token punctuation">,</span> loss<span class="token operator">=</span><span class="token string">'mean_squared_error'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># What we've got left is to indicate to the model which data to fit</span>
+<span class="token comment"># modelf.fit(inouts, targets) fits (trains) the model.</span>
+<span class="token comment"># Epoch = iteration over the full dataset</span>
+
+model<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>training_data<span class="token punctuation">[</span><span class="token string">'inputs'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> training_data<span class="token punctuation">[</span><span class="token string">'targets'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> epochs<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span> verbose<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+
+<span class="token comment">#%%</span>
+<span class="token comment"># 4. Extract the weights and bias</span>
+
+model<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>get_weights<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+weights <span class="token operator">=</span> model<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>get_weights<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'weights: </span><span class="token interpolation"><span class="token punctuation">{</span>weights<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+
+biases <span class="token operator">=</span> model<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>get_weights<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'biases: </span><span class="token interpolation"><span class="token punctuation">{</span>biases<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token comment"># 5. Extract the outputs (make predictions)</span>
+<span class="token comment"># model.predict_on_batch(data) calculates the outputs given inputs</span>
+<span class="token comment"># these are the values that were compared to the targets to evaluate the loss function</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>model<span class="token punctuation">.</span>predict_on_batch<span class="token punctuation">(</span>training_data<span class="token punctuation">[</span><span class="token string">'inputs'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">round</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>training_data<span class="token punctuation">[</span><span class="token string">'targets'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">round</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token comment"># 6. Plotting</span>
+<span class="token comment"># The line should be as close to 45 as possible</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>np<span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span>model<span class="token punctuation">.</span>predict_on_batch<span class="token punctuation">(</span>training_data<span class="token punctuation">[</span><span class="token string">'inputs'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span>training_data<span class="token punctuation">[</span><span class="token string">'targets'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Outputs'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'Targets'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br></div></div><br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Tensorflow_example1graph.5c547a49.png" alt="Training Data - Example 1"></div> <br> <h3 id="making-the-model-closer-to-the-numpy-example"><a href="#making-the-model-closer-to-the-numpy-example" aria-hidden="true" class="header-anchor">#</a> Making the model closer to the Numpy example</h3> <div class="language-py line-numbers-mode"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlighted"> </div><div class="highlighted"> </div><br><br><div class="highlighted"> </div><br><br><br><br><br><br><div class="highlighted"> </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div><pre class="language-py"><code><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf
+
+<span class="token comment">#%%</span>
+<span class="token comment"># 2. Data generation</span>
+
+observations <span class="token operator">=</span> <span class="token number">1000</span>
+xs <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span>low<span class="token operator">=</span><span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> high<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span>observations<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+zs <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>observations<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+generated_inputs <span class="token operator">=</span> np<span class="token punctuation">.</span>column_stack<span class="token punctuation">(</span><span class="token punctuation">(</span>xs<span class="token punctuation">,</span> zs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+noise <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>uniform<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>observations<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+generated_targets <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>xs <span class="token operator">-</span> <span class="token number">3</span><span class="token operator">*</span>zs <span class="token operator">+</span> <span class="token number">5</span> <span class="token operator">+</span> noise
+
+np<span class="token punctuation">.</span>savez<span class="token punctuation">(</span><span class="token string">'TF_intro'</span><span class="token punctuation">,</span> inputs<span class="token operator">=</span>generated_inputs<span class="token punctuation">,</span> targets<span class="token operator">=</span>generated_targets<span class="token punctuation">)</span>
+<span class="token comment">#%%</span>
+<span class="token comment"># 3. Solving with TensorFlow</span>
+
+training_data <span class="token operator">=</span> np<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">'TF_intro.npz'</span><span class="token punctuation">)</span>
+
+input_size <span class="token operator">=</span> <span class="token number">2</span>
+output_size <span class="token operator">=</span> <span class="token number">1</span>
+
+<span class="token comment"># tf.keras.Sequential() function that specifies how the model</span>
+<span class="token comment"># will be laid down ('stack layers')</span>
+<span class="token comment"># Linear combination + Output = Layer*</span>
+
+<span class="token comment"># The tf.keras.layers.Dense(output size)</span>
+<span class="token comment"># takes the inputs provided to the model</span>
+<span class="token comment"># and calculates the dot product of the inputs and weights and adds the bias</span>
+<span class="token comment"># It would be the output = np.dot(inputs, weights) + bias</span>
+
+<span class="token comment"># tf.keras.layers.Dense(output_size, kernel_initializer, bias_initializer)</span>
+<span class="token comment"># function that is laying down the model (used tp 'stack layers') and initialize weights</span>
+
+model <span class="token operator">=</span> tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>Dense<span class="token punctuation">(</span>output_size<span class="token punctuation">,</span>
+                          kernel_initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>random_uniform_initializer<span class="token punctuation">(</span>minval<span class="token operator">=</span><span class="token operator">-</span><span class="token number">0.1</span><span class="token punctuation">,</span> maxval<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                          bias_initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>random_uniform_initializer<span class="token punctuation">(</span>minval<span class="token operator">=</span><span class="token operator">-</span><span class="token number">0.1</span><span class="token punctuation">,</span> maxval<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+custom_optimizer <span class="token operator">=</span> tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>optimizers<span class="token punctuation">.</span>SGD<span class="token punctuation">(</span>learning_rate<span class="token operator">=</span><span class="token number">0.02</span><span class="token punctuation">)</span>
+
+<span class="token comment"># model.compile(optimizer, loss) configures the model for training</span>
+<span class="token comment"># https://www.tensorflow.org/api_docs/python/tf/keras/optimizers</span>
+<span class="token comment"># L2-norm loss = Least sum of squares (least sum of squared error)</span>
+<span class="token comment"># scaling by #observations = average (mean)</span>
+
+model<span class="token punctuation">.</span><span class="token builtin">compile</span><span class="token punctuation">(</span>optimizer<span class="token operator">=</span>custom_optimizer<span class="token punctuation">,</span> loss<span class="token operator">=</span><span class="token string">'mean_squared_error'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># What we've got left is to indicate to the model which data to fit</span>
+<span class="token comment"># modelf.fit(inouts, targets) fits (trains) the model.</span>
+<span class="token comment"># Epoch = iteration over the full dataset</span>
+
+model<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>training_data<span class="token punctuation">[</span><span class="token string">'inputs'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> training_data<span class="token punctuation">[</span><span class="token string">'targets'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> epochs<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span> verbose<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+
+<span class="token comment">#%%</span>
+<span class="token comment"># 4. Extract the weights and bias</span>
+
+model<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>get_weights<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+weights <span class="token operator">=</span> model<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>get_weights<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'weights: </span><span class="token interpolation"><span class="token punctuation">{</span>weights<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+
+biases <span class="token operator">=</span> model<span class="token punctuation">.</span>layers<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>get_weights<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'biases: </span><span class="token interpolation"><span class="token punctuation">{</span>biases<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token comment"># 5. Extract the outputs (make predictions)</span>
+<span class="token comment"># model.predict_on_batch(data) calculates the outputs given inputs</span>
+<span class="token comment"># these are the values that were compared to the targets to evaluate the loss function</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>model<span class="token punctuation">.</span>predict_on_batch<span class="token punctuation">(</span>training_data<span class="token punctuation">[</span><span class="token string">'inputs'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">round</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>training_data<span class="token punctuation">[</span><span class="token string">'targets'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">round</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">#%%</span>
+
+<span class="token comment"># 6. Plotting</span>
+<span class="token comment"># The line should be as close to 45 as possible</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>np<span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span>model<span class="token punctuation">.</span>predict_on_batch<span class="token punctuation">(</span>training_data<span class="token punctuation">[</span><span class="token string">'inputs'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span>training_data<span class="token punctuation">[</span><span class="token string">'targets'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Outputs'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'Targets'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br></div></div><br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/INputOutp.d6d85074.png" alt="Training Data - Example 1"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/notlinear.e6eda647.png" alt="Training Data - Example 1"></div> <br> <h2 id="going-deeper-introduction-to-deep-neural-networks"><a href="#going-deeper-introduction-to-deep-neural-networks" aria-hidden="true" class="header-anchor">#</a> Going deeper Introduction to deep neural networks</h2> <p>Mixing linear combinations and non-linearities allows us to model arbitrary functions.</p> <br> <p>The layer is the building block of neural networks.
+The initial linear combinations and the added non-linearity form a layer.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/layer.30532299.png" alt="Training Data - Example 1"></div> <br> <p>When we have more then one layer, we are talking about neural network.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet.8bf766f6.png" alt="Training Data - Example 1"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet2.e44593c1.png" alt="Training Data - Example 1"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet3.638db6a6.png" alt="Training Data - Example 1"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet4.ac034b86.png" alt="Training Data - Example 1"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet5.5a84a0a6.png" alt="Training Data - Example 1"></div> <br> <p>We refer to the width and depth (but not only) as hyperparameters</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet6.6010cb9d.png" alt="Training Data - Example 1"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet7.f5683ee2.png" alt="Training Data - Example 1"></div> <br> <p>Each arrow represents the mathematical transformation of a certain value</p> <p>So a certain way is applied then a non-linearity is added know that the non-linearity doesn't change
+the shape of the expression it only changes its linearity.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet8.cea37426.png" alt="Training Data - Example 1"></div> <br> <p>For example weight 3 6 is applied to the third input and is involved in calculating the 6th hidden unit in the same way,
+Weights 1 6 2 6 and so on until 8 6 all participate in computing the sixth hit and unit.
+<strong>They are linearly combined</strong>.
+And then <strong>nonlinearity is added</strong> in order to produce the sixth hidden unit in the same way we get each of the
+other hidden units.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet9.e9d71476.png" alt="Training Data - Example 1"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet10.e92be7af.png" alt="Training Data - Example 1"></div> <br> <p>Well then we have the first hit and we're using the same logic we can linearly combine the hidden units
+and apply a nonlinearity right.
+Indeed this time though there are nine input hit in units and none output hit in units.
+Therefore the weights will be contained in a 9 by 9 matrix and there will be 81 arrows.
+Finally we applied nonlinearity and we reached the second hidden layer.
+We can go on and on and on like this we can add a hundred hidden layers if we want.
+That's a question of how deep we want our deep net to be.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet11.92c12397.png" alt="Training Data - Example 1"></div> <br> <p>Finally we'll have the last hidden layer when we apply the operation once again we will reach the output
+layer the output units depend on the number of outputs we would like to have in this picture.
+There are four.
+They may be the temperature humidity precipitation and pressure for the next day.
+To reach this point we will have a nine by four Waite's matrix which refers to 36 arrows or 36 weights
+exactly what we expected.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet12.3ff8c451.png" alt="Training Data - Example 1"></div> <br> <p>All right as before our optimization goal is finding values for major cities that would allow us to
+convert inputs into correct outputs as best as we can.
+This time though we are not using a single linear model but a complex infrastructure with a much higher
+probability of delivering a meaningful result.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet13.1294dbf9.png" alt="Training Data - Example 1"></div> <br> <p>We said non-linearities are needed so we can represent more complicated relationships.
+While that is true it isn't the full picture an important consequence of including non-linearities is <strong>the ability to stack Layers stacking layers is the process of placing one layer after the other in a meaningful way. Remember that it's fundamental.</strong></p> <br> <p><strong>We cannot stack layers when we only have linear relationships.</strong></p> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet14.2a25a87a.png" alt="Training Data - Example 1"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet15.4c7ec8bd.png" alt="Training Data - Example 1"></div> <br> <p>The point we will make is that we cannot stack Lears when we have only linear relationships.
+Let's prove it.
+Imagine we have a single hidden layer and there are no non-linearities.
+So our picture looks this way.
+There are eight input nodes nine head and nodes in the hidden layer and four output nodes.
+Therefore we have an eight by nine Waites matrix.
+When your relationship between the input layer and the hidden layer Let's call this matrix W. one.
+The hidden units age according to the linear model H is equal to x times w 1.
+Let's ignore the biases for a while.
+So our hidden units are summarized in the matrix H with a shape of one by nine.
+Now let's get to the output layer from the hidden layer once again according to the linear model Y is
+equal to h times W2 we have W2 as these weights are different.
+We already know the H matrix is equal to x times.
+W1 Right.
+Let's replace h in this equation Y is equal to x times w 1 times.
+W2 but w 1 and w 2 can be multiplied right.
+What we get is a combined matrix W star with dimensions 8 by 4 well then our deep net can be simplified
+into a linear model which looks this way y equals x times w star knowing that we realize the hidden
+layer is completely useless in this case.
+We can just train this simple linear model and we would get the same result in mathematics.
+This seems like an obvious fact but in machine learning it is not so clear from the beginning.
+The two consecutive linear transformations are equivalent to a single one.
+Even if we add 100 layers the problem would be simplified to a single transformation.
+That is the reason we need non-linearities.
+Without them stacking layers one after the other is meaningless and without stacking layers we will
+have no depth.
+What's more with no depth.
+Each and every problem will equal the simple linear example we did earlier.
+And many practitioners would tell you it was borderline machine learning.
+All right let's summarize in one sentence.</p> <br> <p><strong>You have deep nets and find complex relationships through arbitrary functions.
+We need non-linearities.</strong></p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet16.d67f86c9.png" alt="Training Data - Example 1"></div> <br> <p>Point taken.</p> <p>Non-linearities are also called activation functions.
+Henceforth that's how we will refer to them activation functions transform inputs into outputs of a different kind.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet17.07c24da2.png" alt="Training Data - Example 1"></div> <br> <p>Think about the temperature outside.
+I assume you wake up and the sun is shining.
+So you put on some light clothes you go out and feel warm and comfortable.
+You carry your jacket in your hands in the afternoon the temperature starts decreasing.
+Initially you don't feel a difference at some point though your brain says it's getting cold.
+You listen to your brain and put on your jacket the input you got was the change in the temperature
+the activation function transformed this input into an action put on the jacket or continue carrying
+it.
+This is also the output after the transformation.
+It is a binary variable jacket or no jacket.
+That's the basic logic behind nonlinearities the change in the temperature was following a linear model</p> <p><strong>as it was steadily decreasing the activation function transformed this relationship into an output linked
+to the temperature but was of a different kind</strong></p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet18.8ff108ee.png" alt="Training Data - Example 1"></div> <br> <p>its derivative as you may recall the derivative is an essential part of the gradient
+descent.
+Naturally when we work with tenths or flow we won't need to calculate the derivative as tenths or flow.
+Does that automatically Anyhow the purpose of this lesson is understanding these functions.
+There are graphs and ranges in a way that would allow us to acquire intuition about the way they behave.
+Here's the functions graph.
+And finally we have it's range.
+Once we have applied the sigmoid as an activator all the outputs will be contained in the range from
+0 to 1.
+So the output is somewhat standardized.
+All right here are the other three common activators the Tench also known as the hyperbolic tangent.
+The real Lu aka the rectified linear unit and the soft Max activator you can see their formulas derivatives
+graphs and ranges.
+The saaf next graph is not missing.
+The reason we don't have it here is that it is different every time.
+Pause this video for a while and examine the table in more detail.
+You can also find this table in the course notes.
+So all these functions are activators right.
+What makes them similar.
+Well let's look at their graphs all Armano tonic continuous and differentiable.
+These are important properties needed for the optimization process as we are not there yet.
+We will leave this issue for later.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet19.d0225ce2.png" alt="Training Data - Example 1"></div> <br> <p>Before we conclude I would like to make this remark.
+Activation functions are also called transfer functions because of the transformation properties.
+The two terms are used interchangeably in machine learning context but have differences in other fields.
+Therefore to avoid confusion we will stick to the term activation functions.</p> <h3 id="softmax-function"><a href="#softmax-function" aria-hidden="true" class="header-anchor">#</a> softmax function</h3> <p>Let's continue exploring this table which contains mostly Greek letters we said the soft max function
+has no definite graph y so while this function is different if we take a careful look at its formula
+we would see the key difference between this function and the other is it takes an argument the whole
+vector A instead of individual elements.
+So the self max function is equal to the exponential of the element at position.
+I divided by the sum of the exponentials of all elements of the vector.
+So while the other activation functions get an input value and transform it regardless of the other
+elements the SAAF Max considers the information about the whole set of numbers we have.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Softmax1.a9860eb4.png" alt="Softmax"></div> <br> <p>A key aspect of the soft Max transformation is that the values it outputs are in the range from 0 to 1.
+There is some is exactly 1 What else has such a property.
+Probabilities Yes probabilities indeed.
+The point of the soft Max transformation is to transform a bunch of arbitrarily large or small numbers
+that come out of previous layers and fit them into a valid probability distribution.
+This is extremely important and useful.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Softmax2.dd367e1d.png" alt="Softmax"></div> <br> <p>Remember our example with cats dogs and horses we saw earlier.
+One photo was described by a vector containing 0.1 0.2 and 0.7.
+We promise we will tell you how to do that.
+Well that's how through a soft Max transformation we kept our promise now that we know we are talking
+about probabilities we can comfortably say we are 70 percent certain the image is a picture of a horse.
+This makes everything so intuitive and useful that the SAAF next activation is often used as the activation
+of the final output layer and classification problems.
+So no matter what happens before the final output of the algorithm is a probability distribution.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Softmax3.2baf07f3.png" alt="Softmax"></div> <br> <h3 id="backpropagation"><a href="#backpropagation" aria-hidden="true" class="header-anchor">#</a> Backpropagation</h3> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation1.f4403676.png" alt="Backpropagation"></div> <br> <p>First I'd like to recap what we know so far we've seen and understood the logic of how layers are stacked.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation2.62b3c17c.png" alt="Backpropagation"></div> <br> <p>We've also explored a few activation functions and spent extra time showing they are central to the concept of stacking layers.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet19.d0225ce2.png" alt="DeepNet"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet14.2a25a87a.png" alt="DeepNet"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/DeepNet15.4c7ec8bd.png" alt="DeepNet"></div> <br> <p>Moreover by now we have said 100 times that the training process consists of updating parameters through the gradient descent for optimizing the objective function.</p> <p>In supervised learning the process of optimization consisted of minimizing the loss.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/GradientDescent.4e73561c.png" alt="Gradient Descent"></div> <br> <p>Our updates were directly related to the partial derivatives of the loss and indirectly related to the</p> <p>errors or deltas as we called them.</p> <p>Let me remind you that the Deltas were the differences between the targets and the outputs.</p> <p>All right as we will see later deltas for the hidden layers are trickier to define.
+Still they have a similar meaning.</p> <p>The procedure for calculating them is called back propagation of errors having these deltas allows us to vary parameters using the familiar update rule.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation3.665e3a7d.png" alt="Backpropagation"></div> <br> <p>Let's start from the other side of the coin forward propagation</p> <p>Forward propagation is the process of pushing inputs through the net.</p> <p>At the end of each epoch the obtained outputs are compared to the targets to form the errors.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation4-Forward.f6e69472.png" alt="Backpropagation"></div> <br> <p>Then we back propagate through partial derivatives and change each parameter so errors at the next epoch are minimized.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation5.de199fcb.png" alt="Backpropagation"></div> <br> <p>For the minimal example the back propagation consisted of a single step, aligning the weights, given the errors we obtained.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation6.6628b3bb.png" alt="Backpropagation"></div> <br> <p>Here's where it gets a little tricky when we have a deep net.
+We must update all the weights related to the input layer and the hidden layers.
+For example in this famous picture we have 270 weights and yes this means we had to manually draw all 270 arrows you see here.</p> <p>So updating all 270 weights is a big deal.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation7.7aba3a0e.png" alt="Backpropagation"></div> <br> <p>But wait.
+We also introduced activation functions.
+This means we have to update the weights accordingly.
+Considering the use nonlinearities and their derivatives.</p> <br> <p>Finally to update the weights we must compare the outputs to the targets.
+This is done for each layer but we have no targets for the hidden units.
+We don't know the errors So how do we update the weights.
+That's what back propagation is all about.
+We must arrive the appropriate updates as if we had targets.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation8.e7cb69ec.png" alt="Backpropagation"></div> <br> <p>Now the way academics solve this issue is through errors.
+The main point is that we can trace the contribution of each unit hit or not to the error of the output.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation9.611be532.png" alt="Backpropagation"></div> <br> <p>OK great let's look at the schematic illustration of back propagation shown here our net is quite simple.</p> <p>It has a single hidden layer.</p> <p>Each node is labeled.</p> <p>So we have inputs x 1 and x 2 hidden layer units output layer units.
+Why one in y2 two.
+And finally the targets T1 and T2.</p> <p>The weights are w 1 1 w 1 2 w 1 3 w 2 1 w 2 2 and W 2 3 for the first part of the net.
+For the second part we named them you 1 1 you 1 2 you 2 1 you 2 2 3 1 and you 3 2.
+So we can differentiate between the two types of weights.</p> <p>That's very important.</p> <p>We know the error associated with Y 1 and y to as it depends on known targets.
+So let's call the two errors.
+E 1 and 2.</p> <p>Based on them we can adjust the weights labeled with you.
+Each U contributes to a single error.</p> <p>For example you 1 1 contributes to e 1.</p> <p>Then we find its derivative and update the coefficient.
+Nothing new here.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation10.7c48d985.png" alt="Backpropagation"></div> <br> <p>Now let's examine w 1 1 .
+Helped us predict h1 But then we needed h1 to calculate y1 in y2.
+Thus it played a role in determining both errors.
+e1 and e2.</p> <p>So while u11 contributes to a single error w11 contributes to both errors.
+Therefore it's adjustment rule must be different.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation11.8021980a.png" alt="Backpropagation"></div> <br> <p>The solution to this problem is to take the errors and back propagate them through the net using the
+weights.</p> <p>Knowing the u weights we can measure the contribution of each hit in unit to the respective errors.</p> <p>Then once we found out the contribution of each hit in unit to the respective errors we can update the
+W weights.</p> <p>So essentially through back propagation the algorithm identifies which weights lead to which errors
+then it adjusts the weights that have a bigger contribution to the errors by more than the weights with
+a smaller contribution.</p> <p>A big problem arises when we must also consider the activation functions.
+They introduce additional complexity to this process.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation12.65bdcdac.png" alt="Backpropagation"></div> <br> <p>Linear your contributions are easy but non-linear ones are tougher.
+Emergent back propagating in our introductory net.
+Once you understand it, it seems very simple.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation9.611be532.png" alt="Backpropagation"></div> <br> <p>While pictorially straightforward mathematically it is rough to say the least.</p> <p>That is why back propagation is one of the biggest challenges for the speed of an algorithm.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Backpropagation13.2350c7d3.png" alt="Backpropagation"></div> <br> <h2 id="overfitting"><a href="#overfitting" aria-hidden="true" class="header-anchor">#</a> Overfitting</h2> <table><thead><tr><th style="text-align:center;">Underfitting</th> <th style="text-align:center;">Overfitting</th></tr></thead> <tbody><tr><td style="text-align:center;">Underfeeding means the model has not captured the underlying logic of the data. It doesn't know what to do and therefore provides an answer that is far from correct.</td> <td style="text-align:center;">Broadly speaking overfitting means our training has focused on the particular training set so much it has &quot;missed the point&quot;.</td></tr></tbody></table> <p>First we will look at a regression and then we'll consider a classification problem.
+Here we can see several data points following the blue function with some minor noise a good algorithm would result in a model that looks like this.</p> <p>It is not perfect but it is very close to the actual relationship.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/FitModel.0f38b4f1.png" alt="Fit Model"></div> <br> <p>We can certainly say a linear model would be an underfeeding model.
+It provides an answer but does not capture the underlying logic of the data.
+It doesn't have strong predictive power.
+It's kind of lame under fitted models are clumsy.</p> <p>They have high costs in terms of high loss functions and their accuracy is low.
+You quickly realize that either there are no relationships to be found or you need a more complex model.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Underfitted.ef9bf9cb.png" alt="Underfitted Model"></div> <br> <p>Let's check in overfitting model here it is now that you see this picture we can say overfitting refers to models that are so super good at modeling the training data that they fit or come very near each observation.</p> <p>The problem is that the random noise is captured inside and overfitting model.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Overfitted.7e586205.png" alt="Underfitted Model"></div> <br> <h3 id="summary"><a href="#summary" aria-hidden="true" class="header-anchor">#</a> Summary</h3> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/AlthreeFitModels.08ddbf8a.png" alt="Underfitted Model"></div> <br> <h2 id="training-and-validation"><a href="#training-and-validation" aria-hidden="true" class="header-anchor">#</a> Training and validation</h2> <p>Usually we'll be able to spot overfitting by dividing our available data into three subsets training validation and test.</p> <p>The first one is the training data set as its name suggests.</p> <p>It helps us train the model to its final form.
+As you should know that's the place where we perform everything we've seen until now nothing is new here since so far we thought all data is training data but we intentionally labelled the Python variables training data instead of data.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/TrainingValidationAndTest.dff55a6a.png" alt="Training Validation and Test"></div> <br> <p>The validation data set is the one that will help us detect and prevent overfitting.</p> <p>All the training is done on the training set.
+In other words we update the weights for the training so only every once in a while we stop training for a bit.
+At this point the model is somewhat trained.
+What we do next is take the model and apply it to the validation data set.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Training.840b8310.png" alt="Training"></div> <br> <p>This time we just run it without updating the weights so we only propagate forward not backward.</p> <p>In other words we just calculate its loss function on average the last function calculated for the validation set should be the same as the one of the training set.</p> <p>This is logical as the training and validation sets were extracted from the same initial dataset containing the same perceived dependencies.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/Validation.5e34f023.png" alt="Validation"></div> <br> <p>Normally we would perform this operation many times in the process of creating a good machine learning algorithm.</p> <p>The two last functions we calculate are referred to as training loss and validation loss and because the data in the training is trained using the gradient descent.</p> <p>Each subsequent loss will be lower or equal to the previous one.</p> <p>That's how gradient descent works by definition so we are sure that treating loss is being minimized.</p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/TrainingandValidation.bedacac2.png" alt="Training and Validation"></div> <br> <p>That's where the validation loss comes in play at some point the validation loss could start increasing.</p> <p><strong>That's a red flag.</strong></p> <p>We are overfitting we are getting better at predicting the training set but we are moving away from the overall logic data.</p> <p><strong>At this point we should stop training the model.</strong></p> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/OverfittingFlag.b183ee04.png" alt="Overfitting Flag"></div> <br> <br> <div style="text-align:center;"><img src="/Ubuntu/assets/img/ValidationLossVsTrainingLoss.beee1c35.png" alt="Validation Loss Vs Training Loss"></div> <br> <p><strong>It is extremely important that the model is not trained on validation samples.</strong></p> <p>This will eliminate the whole purpose of the above mentioned process.
+The training set and the validation set should be separate without overlapping each other.</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/Ubuntu/assets/js/app.91ea8220.js" defer></script><script src="/Ubuntu/assets/js/3.0dc4f8a0.js" defer></script><script src="/Ubuntu/assets/js/2.0b4d2525.js" defer></script>
+  </body>
+</html>
