@@ -1,6 +1,7 @@
 module.exports = {
     base: '/Ubuntu/',
     title: 'Ubuntu Rules',
+    plugins: ['@vuepress/back-to-top'],
     themeConfig: {
         nav: [
             { text: 'TensorFlow', link: '../../Pages/Python/TensorFlow.html' },
@@ -10,6 +11,5 @@ module.exports = {
     },
     markdown: {
         lineNumbers: true
-    },
-    plugins: ['@vuepress/back-to-top']
+    }
 }
