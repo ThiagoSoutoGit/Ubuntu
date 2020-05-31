@@ -1355,5 +1355,176 @@ We are overfitting we are getting better at predicting the training set but we a
 This will eliminate the whole purpose of the above mentioned process.
 The training set and the validation set should be separate without overlapping each other.
 
+<br>
 
+We explained why we should split the data into three parts training validation and test.
+This is a standard mechanism and usually when machine learning is appropriate we have enough data to apply it.
+
+What if we have a small data set.
+
+We can't afford to split it into three datasets as we will lose some of the underlying relationships or worse we can have so little data left or training that the algorithm cannot learn anything.
+
+There is another answer to this issue and it's called n fold cross-validation.
+
+
+This is a strategy that resembles the general one but combines the train and validation data sets in a clever way.
+
+However it still requires a test subset.
+
+We're combining the training and validation steps but we can't avoid the test stage.
+
+
+All right let's say we have a dataset containing 11000 observations we'll save 1000 observations for the test.
+What we are left with are 10000 samples.
+
+<br>
+<div style="text-align: center;">
+<img src="../../Resources/Python/Tensorflow/NCross.png" alt="NCross">
+</div>
+<br>
+
+Please notice this dataset is not very big in data science.
+We often deal with ginormous data sets or at least that's the hope side note.
+Ginormous datasets have their own big problem being so large they often have a lot of missing values.
+Such data is usually referred to as being sparse.
+This introduces a whole new spectrum of issues.
+
+
+In any case we want to train on 9000 data points and validate on 1000.
+We'll split the remaining data into 10 subsets containing 1000 observations each.
+We fold it 10 times.
+
+So this is a 10 fold cross-validation 10 is also a commonly used value and that's why we picked it for this illustration.
+We treat one subset as a validation set while the other nine combined as a training set.
+Visually it looks this way we have 10 combinations.
+
+The orange set is the one.
+In addition one while the blue ones are the training sets during the first epoch the first chunk of data serves as validation.
+Then in the second epoch the second chunk of data serves as validation and so on.
+In this way for each epoch we don't overlap training and validation as it should be.
+
+<br>
+<div style="text-align: center;">
+<img src="../../Resources/Python/Tensorflow/FoldCross.png" alt="NCross">
+</div>
+<br>
+
+Moreover, we managed to use the whole dataset except for the test part.
+As with all good things this comes at a price we have still trained on the validation set which was not a good idea.
+
+It is less likely that the overfitting flag is raised and it is possible that we all were fitted a bit.
+The tradeoff is between not having a model or having a model that's a bit over fitted and fold cross-validation solves the scarce data issue but should by no means be used as the norm.
+
+
+<br>
+<div style="text-align: center;">
+<img src="../../Resources/Python/Tensorflow/NCrossProsCons.png" alt="NCross">
+</div>
+<br>
+
+
+**Whenever you can divide your data into three parts training validation and test only if it doesn't manage to learn much because of data scarce it you should try the old cross-validation.**
+
+
+## Early Stopping
+
+There is one less detail related to overfitting we should examine more carefully.
+We said a dozen times we trained the model until the last function is minimized.
+We can go on doing that forever but at some point will overfit.
+That is why we introduced the validation dataset and said a thing or two about breaking the training
+process in this lesson we will explore additional rules that will indicate our model has been trained.
+
+The proper term is **early stopping** generally early stopping is a technique to prevent overfitting. It is called early stopping as we want to stop early before we overfit that is.
+
+
+The simplest one is to train for a pre-set number of epochs in the minimal example after the first section.
+
+We train for 100 epochs.
+
+This gave us no guarantee that the minimum has been reached or passed a high enough learning rate would even cause the loss to divert to infinity.
+
+Still the problem was so simple that rookie mistakes aside very few epochs would cause a satisfactory result.
+
+However our machine learning skills have improved so much and we shouldn't even consider using this naive method.
+
+<br>
+<div style="text-align: center;">
+<img src="../../Resources/Python/Tensorflow/EarlyStopping.png" alt="Early Stopping">
+</div>
+<br>
+
+
+A bit more sophisticated technique is to stop when the last function updates become sufficiently small.
+We even had a note on that when we introduce the gradient descent a common rule of thumb is to stop
+when the relative decrease in the loss function becomes less than zero point zero zero or one or 0.1 percent.
+
+This simple rule has two underlying ideas.
+
+First we are sure we won't stop before we have reached a minimum.
+That's because of the way gradient descent works.
+It will descend until a minimum is reached.
+The last function will stop changing making the update rule yielding in the same weights.
+In this way we'll be stuck in the minimum.
+
+The second idea is that we want to save computing power by using as few iterations as possible.
+As we said once we have reached the minimum or diverged to infinity we will be stuck there knowing that a gazillion more epochs won't change a thing.
+We can just stop there.
+This saves us the trouble of iterating uselessly without updating anything.
+
+<br>
+<div style="text-align: center;">
+<img src="../../Resources/Python/Tensorflow/EarlyStopping2.png" alt="Early Stopping">
+</div>
+<br>
+
+That's obviously a level up from the previous method while the pre-set number of epochs approach may ultimately minimize the loss.
+Chances are we can't guess the number of required epochs.
+
+Probably the algorithms would have performed thousands of iterations that did not update the weights.
+Obviously each epoch that changes nothing is useless and should be dropped.
+Alright so the first technique didn't deal with any problems except for minimizing the loss.
+
+The second technique optimize the cost and save computing power.
+But both can lead to tremendous overfitting.
+It's only natural that we need a more advanced technique.
+
+<br>
+<div style="text-align: center;">
+<img src="../../Resources/Python/Tensorflow/EarlyStopping3.png" alt="Early Stopping">
+</div>
+<br>
+
+We are talking about the validation set strategy.
+This is the simplest clever technique for early stopping that prevents overfitting.
+
+This is the simplest clever technique for early stopping that prevents overfitting.
+
+<br>
+<div style="text-align: center;">
+<img src="../../Resources/Python/Tensorflow/EarlyStopping4.png" alt="Early Stopping">
+</div>
+<br>
+
+
+Now depending on the case.
+Different types of early stopping can be used, the preset number of iterations method was used in the minimal example.
+That wasn't by chance.
+The problem was linear and super simple.
+
+A more complicated method for early stopping would be a stretch.
+
+The second method that monitors the relative change is simple and clever but doesn't address overfitting the validation set strategy is simple and clever and it prevents overfitting.
+
+However, it may take our algorithm a really long time to overfit it is possible that the weights are barely moving and we still haven't started overfitting.
+
+That's why I like to use a combination of both methods.
+
+So my rule would be **stop when the validation loss starts increasing or when the training last becomes very small.**
+
+
+<br>
+<div style="text-align: center;">
+<img src="../../Resources/Python/Tensorflow/EarlyStopping6.png" alt="Early Stopping">
+</div>
+<br>
 
