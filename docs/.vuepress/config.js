@@ -1,4 +1,7 @@
 module.exports = {
+    plugins: [
+        'vuepress-plugin-latex'
+    ],
     base: '/Ubuntu/',
     title: 'Ubuntu Rules',
     themeConfig: {

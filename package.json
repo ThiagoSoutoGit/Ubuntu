@@ -4,7 +4,7 @@
     "docs:build": "vuepress build docs",
     "docs:devo": "vuepress dev docs --open --host localhost NODE_OPTIONS='--max-old-space-size=16384'"
   },
-  "devDependencies": {
-    "@vuepress/plugin-back-to-top": "^1.5.0"
+  "dependencies": {
+    "vuepress-plugin-latex": "^0.1.3"
   }
 }
